@@ -25,10 +25,10 @@
 # in [logger] section as follows:
 #
 # [logger]
-# fillename=@ROUTER_INSTALL_LOGDIR@/mysqlrouter.log
+# fillename=@ROUTER_LOGDIR@/mysqlrouter.log
 #
 
-@ROUTER_INSTALL_LOGDIR@/mysqlrouter.log {
+@ROUTER_LOGDIR@/mysqlrouter.log {
         create 600 mysqlrouter mysqlrouter
         notifempty
         daily

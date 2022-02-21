@@ -68,6 +68,18 @@ INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/mysql-log-rotate
   )
 
 IF(WITH_ROUTER)
+  # logging folder can be set to empty to log to console
+  IF(IS_ABSOLUTE "${ROUTER_INSTALL_LOGDIR}")
+    SET(_logdir ${ROUTER_INSTALL_LOGDIR})
+  ELSEIF(NOT ROUTER_INSTALL_LOGDIR)
+    SET(_logdir "/var/log/mysqlrouter/")
+  ELSE()
+    SET(_logdir ${CMAKE_INSTALL_PREFIX}/${ROUTER_INSTALL_LOGDIR})
+  ENDIF()
+  SET(ROUTER_LOGDIR ${_logdir}
+    CACHE STRING "Location of log files; empty is console (logging_folder)")
+  UNSET(_logdir)
+
   CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/mysqlrouter-log-rotate.in
     ${CMAKE_CURRENT_BINARY_DIR}/mysqlrouter-log-rotate @ONLY)
 
